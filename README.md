@@ -1,1 +1,2 @@
 # Giuco-dell-Orca
+Dobbiamo ricreare “il gioco dell’oca” in Java, ma a modo nostro: difatti il vero nome di questo gioco è “il giuoco dell’orca” ed è una versione più estrema e complicata del gioco citato all’inizio. Il programma dovrà essere suddiviso adeguatamente in funzioni il più generali possibile, suddividendo poi il lavoro in maniera equa nel team e sfruttando tutto quello che abbiamo appreso sull’utilizzo delle classi e opzionalmente anche qualche nuova nozione appresa in corso di sviluppo.
