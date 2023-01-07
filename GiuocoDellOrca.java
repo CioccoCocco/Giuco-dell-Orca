@@ -18,7 +18,7 @@ public class GiuocoDellOrca  {
             giocatori[i] = new Giocatore( nome, pedina );
         }
 
-        campoDaGiuoco = new Tabellone( numCaselle );
+        campoDaGiuoco = new Tabellone( );
         //nel costruttore del domandiere, verranno inserite man mano le domande lette da un file (chiamando la funzione leggiFile() );
         domandiere = new Domandiere();
         //nel costruttore del mazzoImprevisti, verranno inseriti man mano gli imprevisti letti da un file (chiamando la funzione leggiFile() );
