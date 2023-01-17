@@ -8,14 +8,19 @@ class Tabellone {
     private Casella fine; // riferimento all'ultimo nodo della lista
     private int dimensione; // numero di elementi inseriti nella lista
 
-    public Tabellone( ) throws IOException, FileNotFoundException {
+    public Tabellone(int dimMax) throws IOException, FileNotFoundException {
         dimensione = 0;
         int i = 0;
         String titolo;
-
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\fileOrca\\caselle.txt"));
-        titolo = reader.readLine();
         
+        BufferedReader reader;
+        if( dimMax == 50 )  {
+            reader = new BufferedReader(new FileReader("C:\\fileOrca\\caselle50.txt"));
+        } else {
+            reader = new BufferedReader(new FileReader("C:\\fileOrca\\caselle90.txt"));
+        }
+        titolo = reader.readLine();
+
         while( titolo != null )   {
             inserisciUltimo( i, titolo );
             titolo = reader.readLine();
@@ -115,6 +120,45 @@ class Tabellone {
         daSpostare.setPrecedente( primaDue );
         daSpostare.setSuccessivo( dopoDue );
         dopoDue.setPrecedente( daSpostare );
+    }
+
+    public String aggiungiCarattereGiocatore( int indice, Giocatore[] g, int i )  {
+        if( g[indice] != null )  {
+            if( g[indice].getCasellaCorrente() == casellaIn(i) ) {
+                return g[indice].getPedina();
+            } else {
+                return " ";
+            }
+        }
+    }
+
+    public String stampaTabellone( Giocatore[] g )  {
+        String s = "";
+
+        int lunghezza = 10;
+        int altezza = dimensione / 10;
+        String separator = "+";
+
+        for( int i = 0; i < lunghezza; i++ )   {
+            separator += "---+";
+        }
+        separator += "\n";
+
+        for( int k = 0; k < altezza; k++ )  {
+            s += separator;
+
+            for( int i = 0; i < lunghezza; i++ )    {
+                s += "|" + aggiungiCarattereGiocatore( 0, g, i ) + " " + aggiungiCarattereGiocatore( 1, g, i );
+            }
+            s += "|\n";
+            for( int i = 0; i < lunghezza; i++ )    {
+                s += "| " + i + " ";
+            }
+            s += "|\n";
+            for( int i = 0; i < lunghezza; i++ )    {
+                s += "|" + aggiungiCarattereGiocatore( 2, g, i ) + " " + aggiungiCarattereGiocatore( 3, g, i );
+            }
+        }
     }
 
     public String toString()    {
