@@ -1,67 +1,92 @@
 public class Giocatore
 {
 	private String nome;
-	private int point; // punteggio
-	private int pos; // posizione
+	private int soldi; 
+	private int pos;
+	private char carattere;
 	
-	public Giocatore(String nome, int pos)
+	public Giocatore(String name, char carattere)
 	{
-		this.nome = nome;
-		this.pos = pos;
-		this.point = 0;
-	}
-
-	public String getNome()
-	{
-		return nome;
+		this.nome = name;
+		this.carattere = carattere;
+		this.soldi = 0;
+		this.pos = 0;
 	}
 	
-	public String setNome() 
+	public int lanciaDado(Dado d)
 	{
-		return nome;
-	}
-
-	public void setpoint(int point)
-	{
-		this.point = point;
+		return d.random(); // non capisco cos'ho sbagliato
 	}
 	
-	public int getpoint()
+	public void muovi(int nCaselle, int grandezzaCampo)
 	{
-		return point;
-	}
-
-	public void muoviPedina(int pos, int grandCampo)
-	{
-		boolean tornaInd = false;
-		boolean esc = false;
+		boolean esci = false;
 		
-		while(esc != true)
-		{	
-			if(this.pos == grandCampo || tornaInd)
-			{
-				this.pos = this.pos - 1;
-				tornaInd = true;
-			}else {
+		while(!esci) {
 			
-				this.pos = this.pos + 1;
-				
-			}	
-			
-			if(pos <= 1)
-			{
-				esc = true;
-				
+			if(pos == grandezzaCampo-1) {
+				pos -= 1;
+			}
+			else {
+				pos += 1;
 			}
 			
-			pos = pos - 1;
+			if(nCaselle <= 1)
+				esci = true;
 			
-		}	
-		
-		if(this.pos < 0)
-		{
-			this.pos = 0;
-			
+			nCaselle -= 1;
 		}
+		
+		if(pos < 0)
+			pos = 0;
+	}
+	
+	public void chiediDomanda(Domandiere d)
+	{
+		String s = d.getDomanda(); // Andre riusciresti a mettere che returna la domanda al posto del void
+	}
+	
+	public void sfida(Giocatore g2, Dado d)
+	{
+		int p1 = 0;
+		int p2 = 0;
+		
+		for(int i = 0; i < 3; i++) {
+			p1 += d.random();
+			p2 += d.random();
+		}
+		
+		if(p1 > p2) {
+			setSoldi(g2.getSoldi(), true);
+			g2.setSoldi(g2.getSoldi(), false);			
+		}
+		else {
+			g2.setSoldi(getSoldi(), true);
+			setSoldi(getSoldi(), false);
+		}
+	}
+	
+	public int getSoldi()
+	{
+		return soldi;
+	}
+	
+	public void setSoldi(int s, boolean wl)
+	{ //se wl è true aumenta i soldi altrimenti li toglie 
+		if(wl) {
+			soldi += s;
+		}
+		else
+			soldi -= s;
+	}
+	
+	public boolean controlloVincita(int nCaselle)
+	{
+		return pos == nCaselle ?  true :  false;
+	}
+	
+	public void tornaAInizio()
+	{
+		pos = 0;
 	}
 }
