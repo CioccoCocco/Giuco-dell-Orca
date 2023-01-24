@@ -196,9 +196,9 @@ public class Giocatore
         g2.setPunti(0);
     }
 
-    public boolean controlloVincita()
+    public boolean controlloVincita( Tabellone tab )
     {
-        if(casellaCorrente.getSuccessiva() == null)
+        if(casellaCorrente.getSuccessivo() == null)
         {
             if(punti >= 1)
             {
@@ -206,7 +206,7 @@ public class Giocatore
             }
             else
             {
-                tornaAInizio();
+                tornaAInizio(tab);
                 return false;
             }
         }
@@ -216,8 +216,8 @@ public class Giocatore
         }
     }
 
-    public void tornaAInizio()
+    public void tornaAInizio( Tabellone tab )
     {
-        CasellaCorrente = 0;
+        casellaCorrente = tab.getInizio();
     }
 }
