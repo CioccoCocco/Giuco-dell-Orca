@@ -133,7 +133,7 @@ public class GiuocoDellOrca  {
     }
     
     public boolean sezioneVittoria()    {
-        if( giocatori[turno].controlloVincita() == true )   {
+        if( giocatori[turno].controlloVincita(campoDaGiuoco) == true )   {
             System.out.println("No, NO, NOOOO!!! NON E' POSSIBILE!!!");
             return true;
         }
