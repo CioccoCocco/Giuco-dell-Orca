@@ -5,15 +5,15 @@ public class Giocatore
     private Casella casellaCorrente;
     private char pedina;
     private int[] domandeSvolte;
-    private int numdomandeSvolte;
+    private int numDomandeSvolte;
 
-    public void Giocatore(String name, char pedina, Tabellone tab)
-    {
-        this.nome = name;
+    public Giocatore( String nome, char pedina, Tabellone tab )    {
+        this.nome = nome;
         this.pedina = pedina;
         this.punti = 0;
         this.casellaCorrente = tab.casellaIn(0);
         this.domandeSvolte = new int[90];
+        numDomandeSvolte = 0;
     }
 
     public String getNome( )
@@ -21,7 +21,7 @@ public class Giocatore
         return nome;
     }
 
-    public int getpunti( )
+    public int getPunti( )
     {
         return punti;
     }
@@ -46,12 +46,12 @@ public class Giocatore
         this.nome = nome;
     }
 
-    public void setpunti( int punti )
+    public void setPunti( int punti )
     {
         this.punti = punti;
     }
 
-    public void setCasella( Casella casellaCorrente )
+    public void setCasellaCorrente( Casella casellaCorrente )
     {
         this.casellaCorrente = casellaCorrente;
     }
@@ -64,6 +64,10 @@ public class Giocatore
     public int lanciaDado(Dado d)
     {
         return d.lanciaDado();
+    }
+    
+    public void addPunti( int plus )    {
+        punti += plus;
     }
 
     public void muovi(int spostamento)
@@ -115,9 +119,9 @@ public class Giocatore
     
     public boolean DomandeSvolte ( int k )
     {
-        for(int i = 0; ds[i] != null && i < ds.length; i++)
+        for(int i = 0; i < numDomandeSvolte; i++)
         {
-            if(ds[i] == k)
+            if( domandeSvolte[i] == k )
             {
                 return true;
             }
@@ -131,7 +135,7 @@ public class Giocatore
         {
             Domanda domanda = domandiere.getDomanda();
         }
-        while(DomandeSvolte (domanda.getIdentificativo()));
+        while( DomandeSvolte(domanda.getIdentificativo()) );
         return domandiere.getDomanda();
     }
 
