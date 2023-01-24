@@ -5,37 +5,36 @@ import java.io.IOException;
 
 public class Domandiere
 {
-    private Domanda[] mazzo;
-    private int numDomande = 56;
-    
-    public Domandiere(int max) {
-        mazzo = new Domanda[max];
-    }
-    
-    public boolean addDomanda(Domanda d) {
-	if(numDomande < mazzo.length) {
-		mazzo[numDomande] = d;
-		numDomande++;
-		return true;
-	}
-	return false;
+    private Domanda[] domande;
+    private int numDomande;
+
+    public Domandiere( int max )   {
+        this.domande = new Domanda[max];
+        numDomande = 0;
     }
     
     
+    public Domanda domandaRandom( )  {
+        int i;
+        i = (int)Math.random() * 3;
+        return domande[i];
+    }
     
     
+    public void addDomanda( Domanda newDomanda )   {
+        if( numDomande < domande.length )  {
+            domande[numDomande] = newDomanda;
+            numDomande++;
+        } else {
+            System.err.println("Troppe domande inserite");
+        }
+    }
     
     public String leggiFile(int domanda){
         String filePath = "domande.txt";
         
         return readSentenceFromFile(filePath);
     }
-    
-    
-    
-    
-    
-    
     
     //metodo per leggere da file
     public static String readSentenceFromFile(String filePath) {
