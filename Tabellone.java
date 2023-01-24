@@ -15,9 +15,9 @@ class Tabellone {
         
         BufferedReader reader;
         if( dimMax == 50 )  {
-            reader = new BufferedReader(new FileReader("C:\\fileOrca\\caselle50.txt"));
+            reader = new BufferedReader(new FileReader("File\\caselle50.txt"));
         } else {
-            reader = new BufferedReader(new FileReader("C:\\fileOrca\\caselle90.txt"));
+            reader = new BufferedReader(new FileReader("File\\caselle90.txt"));
         }
         titolo = reader.readLine();
 
@@ -43,6 +43,15 @@ class Tabellone {
     public int getUltimoIdentificativo(){
         return fine.getIdentificativo();
     }
+    
+    public Casella getInizio()  {
+        return inizio;
+    }
+    
+    public Casella getFine()    {
+        return fine;
+    }
+    
     // Inserisce un nuovo elemento nella lista al primo posto
     public void inserisciPrimo( int identificativo, String titolo ){
         inizio = new Casella(identificativo,null,null,titolo);
@@ -125,11 +134,10 @@ class Tabellone {
     public String aggiungiCarattereGiocatore( int indice, Giocatore[] g, int i )  {
         if( g[indice] != null )  {
             if( g[indice].getCasellaCorrente() == casellaIn(i) ) {
-                return g[indice].getPedina();
-            } else {
-                return " ";
+                return g[indice].getPedina() + "";
             }
         }
+        return " ";
     }
 
     public String stampaTabellone( Giocatore[] g )  {
@@ -159,6 +167,8 @@ class Tabellone {
                 s += "|" + aggiungiCarattereGiocatore( 2, g, i ) + " " + aggiungiCarattereGiocatore( 3, g, i );
             }
         }
+        
+        return s;
     }
 
     public String toString()    {
